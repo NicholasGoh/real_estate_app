@@ -1,0 +1,13 @@
+name: real_estate
+channels:
+  - conda-forge
+  - defaults
+  - anaconda
+dependencies:
+  - python==3.6.7
+  - pandas
+  - ipykernel
+  - requests
+  - pip
+  - pip:
+    - jdc
