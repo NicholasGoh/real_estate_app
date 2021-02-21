@@ -13,6 +13,3 @@ dependencies:
     - jdc
     - altair
     - streamlit
-    - flask
-    - flask-wtf
-    - python-dotenv
