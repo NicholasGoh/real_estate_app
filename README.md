@@ -19,6 +19,10 @@ Notebooks will then be accessible
 
 	jupyter notebook
 
+### References
+
+[Flask Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) (up to and including chapter 3 so far)
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md)
