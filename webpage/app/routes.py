@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, Markup
 from app import app
 
 # self made packages
@@ -32,9 +32,13 @@ def personal_info():
         schemeOutputs = SchemeManager(form).foo() # assume list
         string = ''
         for data in schemeOutputs:
-            string += str(data) + '' # end of simple concatenation
+            string += str(data.replace('\n', '<br/>').replace('\t', '')) + '<br/>' # end of simple concatenation
 
         # display on webpage
-        flash(string)
-        return redirect(url_for('homepage'))
+        flash(Markup(string))
+        return redirect(url_for('display_brackets'))
     return render_template('personal_info.html', title='Enter personal info', form=form)
+
+@app.route('/display_brackets')
+def display_brackets():
+    return render_template('display_brackets.html', title='Home')

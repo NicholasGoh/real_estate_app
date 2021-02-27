@@ -17,9 +17,11 @@
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
+            {% autoescape false %}
             {% for message in messages %}
             <li>{{ message }}</li>
             {% endfor %}
+            {% endautoescape %}
         </ul>
         {% endif %}
         {% endwith %}
