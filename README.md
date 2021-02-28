@@ -23,7 +23,7 @@ Notebooks will then be accessible
 
 [Flask Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) (up to and including chapter 3 so far)
 
-[Plotly Flask Integration](https://hackersandslackers.com/plotly-dash-with-flask/)
+[Dash Flask Plotly Integration](https://hackersandslackers.com/plotly-dash-with-flask/)
 
 ## License
 
