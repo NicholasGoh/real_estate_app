@@ -11,4 +11,5 @@ class AllPersonalInfo(FlaskForm):
     employment = BooleanField('Currently under employment?')
     remainingLease = IntegerField('Remaining Lease', validators=[DataRequired()])
     appliedForFlat = BooleanField('Have you applied for a flat?')
+    loan = SelectField('Are you planning to take a loan?', validators=[DataRequired()], choices=[('No loan', 'No loan'), ('HDB Housing loan', 'HDB Housing loan'), ('Bank loan', 'Bank loan')])
     submit = SubmitField('Submit')
