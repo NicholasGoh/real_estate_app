@@ -1,6 +1,6 @@
-from app.schemes.housing_grants_for_hdb import HousingGrantsForHDB
-from app.schemes.housing_grants_for_dbss import HousingGrantsForDBSS
-from app.schemes.housing_grants_for_ec import HousingGrantsForEC
+from flaskapp.schemes.housing_grants_for_hdb import HousingGrantsForHDB
+from flaskapp.schemes.housing_grants_for_dbss import HousingGrantsForDBSS
+from flaskapp.schemes.housing_grants_for_ec import HousingGrantsForEC
 
 class SchemeManager():
     def __init__(self, inputs):

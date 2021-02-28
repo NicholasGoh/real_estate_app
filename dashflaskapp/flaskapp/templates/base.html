@@ -1,6 +1,9 @@
 {#this is a jinja comment#}
 <html>
     <head>
+        {#dl latest plotly js library#}
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
         {% if title %} {#special braces for jinja syntax#}
         <title>{{ title }} - Housing Webpage</title>
         {% else %}

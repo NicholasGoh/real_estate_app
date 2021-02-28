@@ -1,14 +1,14 @@
 from flask import render_template, flash, redirect, url_for, Markup
-from app import app
+from flask import current_app as flaskapp
 
 # self made packages
-from app.forms import AllPersonalInfo
-from app.scheme_manager import SchemeManager
+from flaskapp.forms import AllPersonalInfo
+from flaskapp.scheme_manager import SchemeManager
 
-@app.route('/')
+@flaskapp.route('/')
 
 # things that render on homepage
-@app.route('/hompage')
+@flaskapp.route('/homepage')
 def homepage():
     # hard coded things to display
     user = {'username': 'Guest'}
@@ -23,7 +23,7 @@ def homepage():
     return render_template('homepage.html', title='Home', user=user, posts=posts)
 
 # things that render on personal_info_page
-@app.route('/personal_info', methods=['GET', 'POST'])
+@flaskapp.route('/personal_info', methods=['GET', 'POST'])
 def personal_info():
     # self made container for user inputs
     form = AllPersonalInfo()
@@ -37,8 +37,8 @@ def personal_info():
         # display on webpage
         flash(Markup(string))
         return redirect(url_for('display_brackets'))
-    return render_template('personal_info.html', title='Enter personal info', form=form)
+    return render_template('personal_info.html', form=form)
 
-@app.route('/display_brackets')
+@flaskapp.route('/display_brackets')
 def display_brackets():
-    return render_template('display_brackets.html', title='Home')
+    return render_template('display_brackets.html')

@@ -11,5 +11,3 @@ class AllPersonalInfo(FlaskForm):
     employment = BooleanField('Currently under employment?', validators=[DataRequired()])
     remainingLease = IntegerField('Remaining Lease', validators=[DataRequired()])
     submit = SubmitField('Submit')
-
-    

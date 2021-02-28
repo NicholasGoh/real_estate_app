@@ -15,4 +15,8 @@ dependencies:
     - streamlit
     - flask
     - flask-wtf
+    - flask-assets
     - python-dotenv
+    - plotly
+    - dash
+    - ddtrace
