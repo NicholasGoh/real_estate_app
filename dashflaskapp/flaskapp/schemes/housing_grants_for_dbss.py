@@ -25,6 +25,7 @@ class HousingGrantsForDBSS:
             return 'grant given: 0 ' + footnote
 
         avgIncome = self.avgIncome
+        grant = 0
         if self.relationship == 'First Timer Couple':
             grant = 8 * 10 ** 4
             while grant > 0 and avgIncome > 1500:
