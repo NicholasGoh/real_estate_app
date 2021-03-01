@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, Markup
+from flask import render_template, flash, redirect, url_for, Markup, request
 from flask import current_app as flaskapp
 
 # self made packages
@@ -28,17 +28,26 @@ def personal_info():
     # self made container for user inputs
     form = AllPersonalInfo()
     # simple concatenation of all inputs on submit
-    if form.validate_on_submit():
-        schemeOutputs = SchemeManager(form).foo() # assume list
-        string = ''
-        for data in schemeOutputs:
-            string += str(data.replace('\n', '<br/>').replace('\t', '')) + '<br/>' # end of simple concatenation
+    #if form.validate_on_submit():
+        #schemeOutputs = SchemeManager(form).foo() # assume list
+        #string = ''
+        #for data in schemeOutputs:
+            #string += str(data.replace('\n', '<br/>').replace('\t', '')) + '<br/>' # end of simple concatenation
 
         # display on webpage
-        flash(Markup(string))
-        return redirect(url_for('display_brackets'))
+        #flash(Markup(string))
+        #return redirect(url_for('display_brackets'))
     return render_template('personal_info.html', form=form)
 
 @flaskapp.route('/display_brackets', methods=['GET', 'POST'])
 def display_brackets():
+    form = AllPersonalInfo(request.form)
+    if form.validate_on_submit():
+        schemeOutputs = SchemeManager(form).foo() # assume list
+        string = ''
+        for data in schemeOutputs:
+            string = str(data.replace('\n', '<br/>').replace('\t', '')) + '<br/>' # end of simple concatenation
+            # display on webpage
+            flash(Markup(string))
+
     return render_template('display_brackets.html')

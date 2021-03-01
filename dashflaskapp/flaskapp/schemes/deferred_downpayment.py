@@ -4,7 +4,7 @@ class DeferredDownpayment:
         self.applied = inputs.appliedForFlat.data
 
     def checkEligibility(self):
-        name = 'Deferred Downpayment Scheme:\n'
+        name = 'Deferred Downpayment Scheme\n'
         footnote = \
 	'''
         You must have not sold or completed the sale of your existing flat at the point of new flat application
@@ -15,6 +15,6 @@ class DeferredDownpayment:
             assert self.applied == 'Yes'
             assert self.age >= 55
         except AssertionError:
-            return 'Not eligible for Deferred Downpayment Scheme'
+            return name + 'Not eligible for Deferred Downpayment Scheme\n' + footnote
 
-        return name + "Eligible for Deferred Downpayment Scheme" + footnote
+        return name + "Eligible for Deferred Downpayment Scheme\n" + footnote

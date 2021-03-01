@@ -8,17 +8,15 @@ class HousingGrantsForHDB:
         self.employment = inputs.employment.data
         self.remainingLease = inputs.remainingLease.data
     def firstTime_bracket(self):
-        name = 'Housing Grant for HDB:\n'
+        name = 'Housing Grant for HDB\n'
         footnote = \
 	'''
-	   You and the other flat applicants must not:
-	   Own any of the following properties whether locally or overseas,
-	   or have disposed of any such properties in the 30 months before your new flat application:
-	   Private residential property (including privatised HUDC flats and ECs)
-	   House
-	   Building
-	   Land
-           More info <a href="https://www.hdb.gov.sg/residential/buying-a-flat/new/schemes-and-grants/cpf-housing-grants-for-hdb-flats" class="alert-link">here</a>
+        You and the other flat applicants must not own any of the following properties whether locally or overseas, or have disposed of any such properties in the 30 months before your new flat application:
+        1) Private residential property (including privatised HUDC flats and ECs)
+        2) House
+        3) Building
+        4) Land
+        More info <a href="https://www.hdb.gov.sg/residential/buying-a-flat/new/schemes-and-grants/cpf-housing-grants-for-hdb-flats" class="alert-link">here</a>
 	'''
         try:
             # assert all_applicants are fulltimers
@@ -28,7 +26,7 @@ class HousingGrantsForHDB:
             assert self.employment == 'Yes'
             assert self.remainingLease >= 20
         except AssertionError:
-            return 'grant given: 0 ' + footnote
+            return name + 'grant given: 0 ' + footnote
 
         avgIncome = self.avgIncome
         grant = 8 * 10 ** 4
@@ -43,4 +41,4 @@ class HousingGrantsForHDB:
         else:
             ahg = grant - 4 * 10 ** 4
             shg = grant - ahg
-        return name + f' Additional CPF housing grant: {ahg}\n Special CPF housing grant: {shg} ' + footnote
+        return name + f'Additional CPF housing grant: {ahg}\n Special CPF housing grant: {shg} ' + footnote

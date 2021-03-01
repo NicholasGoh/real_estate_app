@@ -20,6 +20,6 @@ class FreshStartHousing():
             assert self.age < 55
             assert self.age >= 35
         except AssertionError:
-            return 'Not eligible for Fresh Start Housing Scheme'
+            return name+ 'Not eligible for Fresh Start Housing Scheme' + footnote
 
-        return name + "Eligible for Fresh Start Housing Scheme" + footnote
+        return name + "Eligible for Fresh Start Housing Scheme\n" + footnote

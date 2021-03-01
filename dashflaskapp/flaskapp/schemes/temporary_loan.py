@@ -13,6 +13,6 @@ class TemporaryLoan():
         try:
             assert self.applied == 'Yes'
         except AssertionError:
-            return 'Not eligible for Temporary Loan Scheme'
+            return name + 'Not eligible for Temporary Loan Scheme\n' + footnote
 
-        return name + "Eligible for Temporary Loan Scheme" + footnote
+        return name + "Eligible for Temporary Loan Scheme\n" + footnote

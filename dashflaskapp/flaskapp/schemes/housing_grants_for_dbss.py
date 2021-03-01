@@ -8,7 +8,7 @@ class HousingGrantsForDBSS:
         self.employment = inputs.employment.data
         self.remainingLease = inputs.remainingLease.data
     def firstTime_bracket(self):
-        name = 'Housing Grant for DBSS:\n'
+        name = 'Housing Grant for DBSS\n'
         footnote = \
 	'''
            More info <a href="https://www.hdb.gov.sg/residential/buying-a-flat/new/schemes-and-grants/cpf-housing-grants-for-dbss-flats" class="alert-link">here</a>
@@ -22,7 +22,7 @@ class HousingGrantsForDBSS:
             assert self.employment == 'Yes'
             assert self.remainingLease >= 20
         except AssertionError:
-            return 'grant given: 0 ' + footnote
+            return name + 'grant given: 0 ' + footnote
 
         avgIncome = self.avgIncome
         grant = 0
