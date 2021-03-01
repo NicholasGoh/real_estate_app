@@ -12,7 +12,7 @@ class DeferredDownpayment:
 	'''
 
         try:
-            assert self.applied == True
+            assert self.applied == 'Yes'
             assert self.age >= 55
         except AssertionError:
             return 'Not eligible for Deferred Downpayment Scheme'

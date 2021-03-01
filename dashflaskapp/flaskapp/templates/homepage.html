@@ -5,4 +5,22 @@
     {% for post in posts %}
     <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
     {% endfor %}
+    <div class="container-fluid">
+        <div class='container' style='height:150px;'></div>
+        <div style="display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;">
+            <button class="btn btn-primary btn-lg" style="width: 400px; height: 100px;">Transactions</button>
+            <button class="btn btn-primary btn-lg" style="width: 400px; height: 100px;">Rental</button>
+        </div>
+        <div style="display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 4px;">
+            <button class="btn btn-primary btn-lg" style="width: 400px; height: 100px;">Financial Schemes</button>
+            <button class="btn btn-primary btn-lg" style="width: 400px; height: 100px;">Macros</button>
+        </div>
+    </div>
 {% endblock %}

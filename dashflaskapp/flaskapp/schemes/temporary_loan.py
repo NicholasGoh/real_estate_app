@@ -11,7 +11,7 @@ class TemporaryLoan():
 	'''
 
         try:
-            assert self.applied == True
+            assert self.applied == 'Yes'
         except AssertionError:
             return 'Not eligible for Temporary Loan Scheme'
 

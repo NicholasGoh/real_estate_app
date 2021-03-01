@@ -13,7 +13,7 @@ class StaggeredDownpayment():
             More info <a href="https://www.hdb.gov.sg/residential/buying-a-flat/new/schemes-and-grants/staggered-downpayment-scheme" class="alert-link">here</a>
 	''' 
         try:
-            assert self.applied == True
+            assert self.applied == 'Yes'
         except AssertionError:
             return 'Not eligible for Staggered Downpayment Scheme'
 

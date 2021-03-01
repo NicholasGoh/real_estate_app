@@ -39,6 +39,6 @@ def personal_info():
         return redirect(url_for('display_brackets'))
     return render_template('personal_info.html', form=form)
 
-@flaskapp.route('/display_brackets')
+@flaskapp.route('/display_brackets', methods=['GET', 'POST'])
 def display_brackets():
     return render_template('display_brackets.html')

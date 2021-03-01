@@ -16,10 +16,10 @@ class HousingGrantsForDBSS:
         # Enhanced CPF Housing Grant EHG
         try:
             # assert all_applicants are fulltimers
-            assert self.firstTime == True
+            assert self.firstTime == 'Yes'
             # work continuously for 12 months prior to application
             # still working at submission of application
-            assert self.employment == True
+            assert self.employment == 'Yes'
             assert self.remainingLease >= 20
         except AssertionError:
             return 'grant given: 0 ' + footnote

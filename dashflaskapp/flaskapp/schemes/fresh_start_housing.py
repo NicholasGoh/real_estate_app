@@ -13,9 +13,9 @@ class FreshStartHousing():
         More info <a href="https://www.hdb.gov.sg/residential/buying-a-flat/new/schemes-and-grants/temporary-loan-scheme">here</a>
 	'''
         try:
-            assert self.employment == True
+            assert self.employment == 'Yes'
             assert self.avgIncome < 7000
-            assert self.employment == True
+            assert self.employment == 'Yes'
             assert self.relationship == "Second Timer Couple"
             assert self.age < 55
             assert self.age >= 35
