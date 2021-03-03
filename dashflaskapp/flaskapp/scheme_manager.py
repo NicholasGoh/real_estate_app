@@ -8,9 +8,9 @@ from flaskapp.schemes.fresh_start_housing import FreshStartHousing
 
 class SchemeManager():
     def __init__(self, inputs):
-        self.scheme1Output = HousingGrantsForHDB(inputs).firstTime_bracket()
-        self.scheme2Output = HousingGrantsForDBSS(inputs).firstTime_bracket()
-        self.scheme3Output = HousingGrantsForEC(inputs).firstTime_bracket()
+        self.scheme1Output = HousingGrantsForHDB(inputs).checkEligibility()
+        self.scheme2Output = HousingGrantsForDBSS(inputs).checkEligibility()
+        self.scheme3Output = HousingGrantsForEC(inputs).checkEligibility()
         self.scheme4Output = StaggeredDownpayment(inputs).checkEligibility()
         self.scheme5Output = DeferredDownpayment(inputs).checkEligibility()
         self.scheme6Output = TemporaryLoan(inputs).checkEligibility()

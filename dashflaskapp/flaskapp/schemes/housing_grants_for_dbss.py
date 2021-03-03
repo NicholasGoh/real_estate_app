@@ -7,7 +7,7 @@ class HousingGrantsForDBSS:
         self.relationship = inputs.relationship.data
         self.employment = inputs.employment.data
         self.remainingLease = inputs.remainingLease.data
-    def firstTime_bracket(self):
+    def checkEligibility(self):
         name = 'Housing Grant for DBSS\n'
         footnote = \
 	'''

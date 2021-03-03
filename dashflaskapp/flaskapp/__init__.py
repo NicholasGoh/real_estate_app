@@ -10,7 +10,6 @@ def init_flask_app():
 
     with flaskApp.app_context():
         from . import routes
-        # from .plotlydash.dashboard import init_dashboard
         from .plotlydash.dashboard import init_dashboard
 
         flaskApp = init_dashboard(flaskApp)
