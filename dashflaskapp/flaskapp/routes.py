@@ -22,25 +22,17 @@ def homepage():
     # pass hard coded variables to homepage.html
     return render_template('homepage.html', title='Home', user=user, posts=posts)
 
+# Financial Scheme portion
 # things that render on personal_info_page
 @flaskapp.route('/personal_info', methods=['GET', 'POST'])
 def personal_info():
     # self made container for user inputs
     form = AllPersonalInfo()
-    # simple concatenation of all inputs on submit
-    #if form.validate_on_submit():
-        #schemeOutputs = SchemeManager(form).foo() # assume list
-        #string = ''
-        #for data in schemeOutputs:
-            #string += str(data.replace('\n', '<br/>').replace('\t', '')) + '<br/>' # end of simple concatenation
-
-        # display on webpage
-        #flash(Markup(string))
-        #return redirect(url_for('display_brackets'))
     return render_template('personal_info.html', form=form)
 
-@flaskapp.route('/display_brackets', methods=['GET', 'POST'])
-def display_brackets():
+# Financial Scheme portion
+@flaskapp.route('/scheme_eligibility', methods=['GET', 'POST'])
+def scheme_eligibility():
     form = AllPersonalInfo(request.form)
     if form.validate_on_submit():
         schemeOutputs = SchemeManager(form).foo() # assume list
@@ -50,4 +42,4 @@ def display_brackets():
             # display on webpage
             flash(Markup(string))
 
-    return render_template('display_brackets.html')
+    return render_template('scheme_eligibility.html')

@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField, IntegerField, FloatField, SelectField
 from wtforms.validators import DataRequired, NumberRange, Optional
 
+# custom web form for financial schemes
 class AllPersonalInfo(FlaskForm):
     avgIncome = FloatField('Average Gross Salary', validators=[DataRequired()])
     age = IntegerField('Age', validators=[DataRequired(), NumberRange(21, 100, 'Enter valid age!')])
