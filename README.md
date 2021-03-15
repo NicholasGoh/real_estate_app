@@ -25,6 +25,8 @@ Notebooks will then be accessible
 
 [Dash Flask Plotly Integration](https://hackersandslackers.com/plotly-dash-with-flask/)
 
+[Google Map Example](https://stackoverflow.com/questions/44218836/python-flask-googlemaps-get-users-current-location-latitude-and-longitude)
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md)
