@@ -1,26 +1,19 @@
 from flask import render_template, flash, redirect, url_for, Markup, request
 from flask import current_app as flaskapp
+from flask_googlemaps import GoogleMaps, Map
+import json
 
 # self made packages
 from flaskapp.forms import AllPersonalInfo
 from flaskapp.scheme_manager import SchemeManager
 
 @flaskapp.route('/')
+def defaultpage():
+    return render_template('homepage.html', nav_bar='disable')
 
-# things that render on homepage
 @flaskapp.route('/homepage')
 def homepage():
-    # hard coded things to display
-    user = {'username': 'Guest'}
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-    ] # end of hard code
-
-    # pass hard coded variables to homepage.html
-    return render_template('homepage.html', title='Home', user=user, posts=posts)
+    return render_template('homepage.html', nav_bar='disable')
 
 # Financial Scheme portion
 # things that render on personal_info_page
@@ -43,3 +36,20 @@ def scheme_eligibility():
             flash(Markup(string))
 
     return render_template('scheme_eligibility.html')
+
+# code to render maps
+@flaskapp.route('/map', methods=['GET'])
+def my_map():
+    with open('all_data/transactions/transactions.json', 'r') as f:
+        data = json.load(f)
+    markers = (float(data['property_1']['x']), float(data['property_1']['y']))
+    map = Map(
+                identifier="view-side",
+                varname="map",
+                style="height:720px;width:1100px;margin:0;", # hardcoded!
+                lat=1.2729546766736342,
+                lng=103.80643708167351,
+                zoom=15,
+                markers=[markers]
+            )
+    return render_template('map.html', map=map)

@@ -9,13 +9,26 @@
         {# bootstrap 4 #}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        {% if title %} {#special braces for jinja syntax#}
-        <title>{{ title }} - Housing Webpage</title>
-        {% else %}
-        <title>Housing Webpage</title>
-        {% endif %}
+        {#head for maps#}
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style>
+          /* Always set the map height explicitly to define the size of the div
+           * element that contains the map. */
+          #map {
+            height: 100%;
+          }
+          /* Optional: Makes the sample page fill the window. */
+          html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+        {#end head for maps#}
     </head>
     <body>
+        {% if nav_bar != 'disable' %}
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -27,9 +40,12 @@
                     <li id='rent-btn'><a href="#">Rent</a></li>
                     <li id='calculator-btn'><a href="{{url_for('personal_info')}}" >Financial Schemes</a></li>
                     <li id="macros-btn"><a href="{{url_for('/macros/')}}">Macros</a></li>
+                    <li id="maps-btn"><a href="/map">Maps</a></li>
                 </ul>
             </div>
         </nav>
+        {% else %}
+        {% endif %}
         
         {#the following is where other .html extends this base.html#}
         {% block content %}{% endblock %}

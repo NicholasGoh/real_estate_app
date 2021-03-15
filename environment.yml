@@ -20,3 +20,4 @@ dependencies:
     - plotly
     - dash
     - ddtrace
+    - flask-googlemaps
