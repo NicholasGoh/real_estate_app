@@ -21,7 +21,7 @@ nav_bar_template = """
                     <li id='rent-btn'><a href="#">Rent</a></li>
                     <li id='calculator-btn'><a href=/personal_info>Financial Schemes</a></li>
                     <li id="macros-btn"><a href=/macros/>Macros</a></li>
-                    <li id="googlemaps-btn"><a href="{{url_for('google_maps')}}">Google Maps</a></li>
+                    <li id="maps-btn"><a href="/map">Maps</a></li>
                 </ul>
             </div>
         </nav>
