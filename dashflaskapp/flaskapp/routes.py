@@ -1,6 +1,5 @@
 from flask import render_template, flash, redirect, url_for, Markup, request
 from flask import current_app as flaskapp
-from flask_googlemaps import GoogleMaps, Map
 import json
 
 # self made packages
@@ -36,20 +35,3 @@ def scheme_eligibility():
             flash(Markup(string))
 
     return render_template('scheme_eligibility.html')
-
-# code to render maps
-@flaskapp.route('/map', methods=['GET'])
-def my_map():
-    with open('all_data/transactions/transactions.json', 'r') as f:
-        data = json.load(f)
-    markers = (float(data['property_1']['x']), float(data['property_1']['y']))
-    map = Map(
-                identifier="view-side",
-                varname="map",
-                style="height:720px;width:1100px;margin:0;", # hardcoded!
-                lat=1.2729546766736342,
-                lng=103.80643708167351,
-                zoom=15,
-                markers=[markers]
-            )
-    return render_template('map.html', map=map)
