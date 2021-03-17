@@ -13,7 +13,7 @@ import dash_core_components as dcc
 from .data_generator import load_gdp, load_hpi, load_ir, load_flat_demand
 from .nav_bar import nav_bar_template
 
-def init_dashboard(server):
+def init_macros(server):
     '''Create a Plotly Dash dashboard.'''
     dashApp = dash.Dash(
         server=server,
@@ -69,37 +69,3 @@ def init_dashboard(server):
         return fig
 
     return dashApp.server
-
-# @dashApp.callback(
-    # Output(component_id='Housing Price Index', component_property='figure'),
-    # Input(component_id='my-slider', component_property='value'),
-# )
-
-# def hpi_graph(value):
-    # hpi = load_hpi()
-    # dff = hpi.copy()
-    # dff_filtered = dff[:value]
-    # fig = px.line(dff_filtered, x='quarter', y= hpi.columns)
-    # return fig
-
-# @dashApp.callback(
-    # Output(component_id='GDP', component_property='figure'),
-    # Input(component_id='GDP', component_property='figure'),
-# )
-
-# def gpd(figure):
-    # dff =  load_gdp()
-    # fig = px.line(dff, x='Quarter', y= dff.columns)
-    # return fig
-
-# def create_data_table(df):
-    # '''Create Dash datatable from Pandas DataFrame.'''
-    # table = dash_table.DataTable(
-        # id='database-table',
-        # columns=[{'name': i, 'id': i} for i in df.columns],
-        # data=df.to_dict('records'),
-        # sort_action='native',
-        # sort_mode='native',
-        # page_size=300
-    # )
-    # return table

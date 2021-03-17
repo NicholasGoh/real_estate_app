@@ -11,7 +11,9 @@ def init_flask_app():
 
     with flaskApp.app_context():
         from . import routes
-        from .macros_plotly.dashboard import init_dashboard
+        from .macros_plotly.dashboard import init_macros
+        from .transactions_plotly.dashboard import init_transactions
 
-        flaskApp = init_dashboard(flaskApp)
+        flaskApp = init_macros(flaskApp)
+        flaskApp = init_transactions(flaskApp)
     return flaskApp
