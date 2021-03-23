@@ -1,3 +1,4 @@
+# code to prepend to dash apps to get the nav bar working in dash apps as well, instead of just in flask
 nav_bar_template = """
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +18,9 @@ nav_bar_template = """
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active" id='home-btn'><a href="/homepage">Home</a></li>
-                    <li id='buysell-btn'><a href=#>Buy/Sell</a></li>
-                    <li id='rent-btn'><a href="#">Rent</a></li>
                     <li id='calculator-btn'><a href=/personal_info>Financial Schemes</a></li>
                     <li id="macros-btn"><a href=/macros/>Macros</a></li>
+                    <li id="transactions-btn"><a href=/transactions/>Transactions</a></li>
                 </ul>
             </div>
         </nav>
@@ -31,14 +31,3 @@ nav_bar_template = """
             {%renderer%}
         </footer>
 """
-# nav_bar_template = """
-    # {% extends "base.html" %}
-    # {% block content %}
-        # {%app_entry%}
-        # <footer>
-            # {%config%}
-            # {%scripts%}
-            # {%renderer%}
-        # </footer>
-    # {% endblock %}
-# """

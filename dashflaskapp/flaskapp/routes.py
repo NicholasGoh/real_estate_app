@@ -1,3 +1,5 @@
+# controls what is rendered on which url link in flask
+
 from flask import render_template, flash, redirect, url_for, Markup, request
 from flask import current_app as flaskapp
 import json
@@ -15,7 +17,7 @@ def homepage():
     return render_template('homepage.html', nav_bar='disable')
 
 # Financial Scheme portion
-# things that render on personal_info_page
+# things that render on personal_info page
 @flaskapp.route('/personal_info', methods=['GET', 'POST'])
 def personal_info():
     # self made container for user inputs

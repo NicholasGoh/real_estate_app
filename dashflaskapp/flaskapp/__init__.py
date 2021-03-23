@@ -5,6 +5,7 @@ from config import Config
 patch_all()
 
 # starts flask app then dash app within flask that controls plotly
+# one dash app for macro, one for transactions
 def init_flask_app():
     flaskApp = Flask(__name__)
     flaskApp.config.from_object(Config)

@@ -1,11 +1,6 @@
-'''Instantiate a Dash app.'''
-import numpy as np
-import pandas as pd
 import dash
-import dash_table
 from dash.dependencies import Input, Output
 import plotly.express as px
-import plotly.graph_objects as go
 import dash_html_components as html
 import dash_core_components as dcc
 
@@ -13,6 +8,7 @@ import dash_core_components as dcc
 from .data_generator import load_gdp, load_hpi, load_ir, load_flat_demand
 from .nav_bar import nav_bar_template
 
+# inits dash app for macros, linked to flask app
 def init_macros(server):
     '''Create a Plotly Dash dashboard.'''
     dashApp = dash.Dash(
@@ -24,7 +20,7 @@ def init_macros(server):
 
     # Create Layout
     dashApp.layout = html.Div([
-        # html.H1('Macro Dash Board', style={'text-align': 'center'}),
+        html.H1('Macro Dash Board', style={'text-align': 'center'}),
         html.Div([
             html.H2(children='Housing Price Index', style = {'text-align': 'left'}),
             html.Div(children=''' The House Price Index (HPI) is a broad measure of the movement of single-family house prices'''),

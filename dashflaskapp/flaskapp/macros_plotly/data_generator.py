@@ -1,6 +1,6 @@
-'''Prepare data for Plotly Dash.'''
 import pandas as pd
 
+# functions to load data easily for macros dash dashboard
 def load_gdp():
     return pd.read_csv('all_data/macros/gdp.csv')
 def load_hpi():

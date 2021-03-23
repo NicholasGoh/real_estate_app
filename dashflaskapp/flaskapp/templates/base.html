@@ -36,11 +36,9 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active" id='home-btn'><a href="{{url_for('homepage')}}">Home</a></li>
-                    <li id='buysell-btn'><a href="#">Buy/Sell</a></li>
-                    <li id='rent-btn'><a href="#">Rent</a></li>
                     <li id='calculator-btn'><a href="{{url_for('personal_info')}}" >Financial Schemes</a></li>
                     <li id="macros-btn"><a href="{{url_for('/macros/')}}">Macros</a></li>
-                    <li id="macros-btn"><a href="{{url_for('/transactions/')}}">Transactions</a></li>
+                    <li id="transactions-btn"><a href="{{url_for('/transactions/')}}">Transactions</a></li>
                 </ul>
             </div>
         </nav>
@@ -55,14 +53,6 @@
                 $('li').removeClass('active');
                 $('#home-btn').addClass('active');
             });
-            $('#buysell-btn').click(function(){
-                $('li').removeClass('active');
-                $('#buysell-btn').addClass('active');
-            });
-            $('#rent-btn').click(function(){
-                $('li').removeClass('active');
-                $('#rent-btn').addClass('active');
-            });
             $('#calculator-btn').click(function(){
                 $('li').removeClass('active');
                 $('#calculator-btn').addClass('active');
@@ -70,6 +60,10 @@
             $('#macros-btn').click(function(){
                 $('li').removeClass('active');
                 $('#macros-btn').addClass('active');
+            });
+            $('#transactions-btn').click(function(){
+                $('li').removeClass('active');
+                $('#transactions-btn').addClass('active');
             });
         </script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
