@@ -22,7 +22,7 @@ def render_table(click_data = None, default=False, max_rows=26):
     click_data = click_data[-4:]
     for data in click_data:
         df = df.append(data)
-    df.index = [[f'comparison {i}' for i in range(len(df))]]
+    df.index = [[f'Property {i}' for i in range(len(df))]]
     rownames = df.columns
     df = df.T
     df['info'] = rownames
