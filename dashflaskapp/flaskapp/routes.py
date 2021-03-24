@@ -30,10 +30,14 @@ def scheme_eligibility():
     form = AllPersonalInfo(request.form)
     if form.validate_on_submit():
         schemeOutputs = SchemeManager(form).foo() # assume list
-        string = ''
+        schemeNames = []
+        schemeEligible = []
+        schemeDetails = []
         for data in schemeOutputs:
-            string = str(data.replace('\n', '<br/>').replace('\t', '')) + '<br/>' # end of simple concatenation
-            # display on webpage
-            flash(Markup(string))
+            schemeNames.append(data[0])
+            schemeEligible.append(data[1])
+            detail = data[2]
+            details = str(detail.replace('\n', '<br/>').replace('\t', '')) + '<br/>'
+            schemeDetails.append(Markup(details))
 
-    return render_template('scheme_eligibility.html')
+    return render_template('scheme_eligibility.html', schemeNames = schemeNames, schemeEligible = schemeEligible, schemeDetails = schemeDetails)

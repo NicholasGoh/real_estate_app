@@ -8,7 +8,7 @@ class HousingGrantsForDBSS:
         self.employment = inputs.employment.data
         self.remainingLease = inputs.remainingLease.data
     def checkEligibility(self):
-        name = 'Housing Grant for DBSS\n'
+        name = 'Housing Grant for DBSS'
         footnote = \
 	'''
            More info <a href="https://www.hdb.gov.sg/residential/buying-a-flat/new/schemes-and-grants/cpf-housing-grants-for-dbss-flats" class="alert-link">here</a>
@@ -22,7 +22,7 @@ class HousingGrantsForDBSS:
             assert self.employment == 'Yes'
             assert self.remainingLease >= 20
         except AssertionError:
-            return name + 'grant given: 0 ' + footnote
+            return [name, False, footnote]
 
         avgIncome = self.avgIncome
         grant = 0
@@ -36,4 +36,4 @@ class HousingGrantsForDBSS:
             while grant > 0 and avgIncome > 750:
                 grant -= 2500
                 avgIncome -= 250
-        return name + f'Enhanced CPF Housing Grant given: {grant} ' + footnote
+        return [name, True, f'Enhanced CPF Housing Grant given: {grant} ' + footnote]

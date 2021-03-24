@@ -6,7 +6,7 @@ class StaggeredDownpayment():
         self.lease = inputs.remainingLease.data
 
     def checkEligibility(self):
-        name = "Staggered Downpayment Scheme\n"
+        name = "Staggered Downpayment Scheme"
         footnote = \
 	'''
             Amount payable during collection of keys is dependent on date when new flat is booked
@@ -15,7 +15,7 @@ class StaggeredDownpayment():
         try:
             assert self.applied == 'Yes'
         except AssertionError:
-            return name + 'Not eligible for Staggered Downpayment Scheme'
+            return [name, False, 'More info <a href="https://www.hdb.gov.sg/residential/buying-a-flat/new/schemes-and-grants/staggered-downpayment-scheme" class="alert-link">here</a>']
 
         if self.loan == 'No loan' or self.loan == 'HDB Housing loan':
             bracket = '''
@@ -35,9 +35,9 @@ class StaggeredDownpayment():
         
         if self.relationship != 'First Timer Couple' or self.relationship != 'First Timer with Second Timer Spouse':
             if self.lease > 0:
-                return name + bracket + footnote
+                return [name, True, bracket + footnote]
             else:
-                return name + "Not eligible for Staggered Downpayment Scheme" + footnote
+                return [name, False, footnote]
         else:
-            return name + bracket + footnote
+            return [name, True, bracket + footnote]
         

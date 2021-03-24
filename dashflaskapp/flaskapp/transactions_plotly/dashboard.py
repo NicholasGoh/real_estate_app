@@ -4,6 +4,7 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 import dash_html_components as html
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 
 # self packages
 from .data_generator import load_transactions, comparisons_df
@@ -37,7 +38,8 @@ def render_table(click_data = None, default=False, max_rows=26):
         [html.Tr([
             html.Td(df.iloc[i][col]) for col in df.columns
         ]) for i in range(min(len(df), max_rows))],
-        id = 'comparison_table'
+        id = 'comparison_table',
+        className = 'table table-bordered active'
     )
 
 # inits transactions dash app that links to flask app
@@ -45,6 +47,7 @@ def init_transactions(server):
     dashApp = dash.Dash(
         server=server,
         routes_pathname_prefix='/transactions/',
+        external_stylesheets=[dbc.themes.BOOTSTRAP]
     )
 
     dashApp.index_string = nav_bar_template
@@ -60,9 +63,9 @@ def init_transactions(server):
         ]),
         html.Div(
             children = render_table(default=True),
-            id = 'comparison_table_div'
+            id = 'comparison_table_div',
         )
-    ])
+    ], className = 'container')
 
     @dashApp.callback(
         Output(component_id='transactions_map', component_property='figure'),
@@ -71,7 +74,7 @@ def init_transactions(server):
 
     def make_map(figure):
         transactions = load_transactions()
-        fig = px.scatter_mapbox(transactions, lat='x', lon='y', hover_name='project', hover_data=['price', 'noOfUnits', 'propertyType', 'floorRange'],
+        fig = px.scatter_mapbox(transactions, lat='x', lon='y', hover_name='project', hover_data=['price', 'noOfUnits', 'propertyType', 'floorRange', 'project', 'tenure', 'region', 'street', 'area'],
                                 color_discrete_sequence=['fuchsia'], zoom=12, height=450)
         fig.update_layout(mapbox_style='open-street-map')
         fig.update_layout(clickmode='event+select')
@@ -90,12 +93,18 @@ def init_transactions(server):
         # preprocess the click data from maps
         points = click['points'][0]
         customdata = points['customdata']
-        data = {'x': points['lat'],
+        data = {
+                'x': points['lat'],
                 'y': points['lon'],
                 'price': customdata[0],
                 'noOfUnits': customdata[1],
                 'propertyType': customdata[2],
-                'floorRange': customdata[3]
+                'floorRange': customdata[3],
+                'project': customdata[4],
+                'tenure': customdata[5],
+                'region': customdata[6],
+                'street': customdata[7],
+                'area': customdata[8]
                }
         data = {k: [str(v)] for k, v in data.items()}
         data = pd.DataFrame.from_dict(data)

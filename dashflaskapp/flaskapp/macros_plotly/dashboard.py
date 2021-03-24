@@ -3,6 +3,7 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 import dash_html_components as html
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 
 # self packages
 from .data_generator import load_gdp, load_hpi, load_ir, load_flat_demand
@@ -14,6 +15,7 @@ def init_macros(server):
     dashApp = dash.Dash(
         server=server,
         routes_pathname_prefix='/macros/',
+        external_stylesheets=[dbc.themes.BOOTSTRAP]
     )
 
     dashApp.index_string = nav_bar_template
@@ -40,7 +42,7 @@ def init_macros(server):
             html.Br(),
             dcc.Graph(id='GDP', figure={})
          ])
-    ])
+    ], className = 'container')
 
     @dashApp.callback(
         Output(component_id='Housing Price Index', component_property='figure'),

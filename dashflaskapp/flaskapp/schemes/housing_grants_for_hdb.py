@@ -8,7 +8,7 @@ class HousingGrantsForHDB:
         self.employment = inputs.employment.data
         self.remainingLease = inputs.remainingLease.data
     def checkEligibility(self):
-        name = 'Housing Grant for HDB\n'
+        name = 'Housing Grant for HDB'
         footnote = \
 	'''
         You and the other flat applicants must not own any of the following properties whether locally or overseas, or have disposed of any such properties in the 30 months before your new flat application:
@@ -26,7 +26,7 @@ class HousingGrantsForHDB:
             assert self.employment == 'Yes'
             assert self.remainingLease >= 20
         except AssertionError:
-            return name + 'grant given: 0 ' + footnote
+            return [name, False, footnote]
 
         avgIncome = self.avgIncome
         grant = 8 * 10 ** 4
@@ -41,4 +41,4 @@ class HousingGrantsForHDB:
         else:
             ahg = grant - 4 * 10 ** 4
             shg = grant - ahg
-        return name + f'Additional CPF housing grant: {ahg}\n Special CPF housing grant: {shg} ' + footnote
+        return [name, True, f'Additional CPF housing grant: {ahg}\n Special CPF housing grant: {shg} ' + footnote]
