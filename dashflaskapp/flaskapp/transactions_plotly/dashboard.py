@@ -37,7 +37,7 @@ def render_table(click_data = None, default=False, max_rows=26):
         [html.Tr([
             html.Td(df.iloc[i][col]) for col in df.columns
         ]) for i in range(min(len(df), max_rows))],
-        id='comparison_table'
+        id = 'comparison_table'
     )
 
 # inits transactions dash app that links to flask app
@@ -52,13 +52,16 @@ def init_transactions(server):
     # Create Layout
     dashApp.layout = html.Div([
         html.H1('Transactions Dashboard', style={'text-align': 'center'}),
-         html.Div([
+        html.Div([
             html.H2(children='Transactions Map', style = {'text-align': 'left'}),
             html.Div(children=''' map to visualize transactions '''),
             html.Br(),
             dcc.Graph(id='transactions_map', figure={})
-         ]),
-        render_table(default=True),
+        ]),
+        html.Div(
+            children = render_table(default=True),
+            id = 'comparison_table_div'
+        )
     ])
 
     @dashApp.callback(
@@ -77,9 +80,10 @@ def init_transactions(server):
         return fig
 
     @dashApp.callback(
-        Output(component_id='comparison_table', component_property='children'),
+        Output(component_id='comparison_table_div', component_property='children'),
         Input(component_id='transactions_map', component_property='clickData'),
     )
+    
     def display_click_data(click):
         if click is None:
             return render_table(default=True)
