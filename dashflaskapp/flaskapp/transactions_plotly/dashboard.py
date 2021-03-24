@@ -26,7 +26,7 @@ def render_table(click_data = None, default=False, max_rows=26):
     rownames = df.columns
     df = df.T
     df['info'] = rownames
-    df.drop(columns=['comparison 0'], inplace=True)
+    df.drop(columns=['Property 0'], inplace=True)
     columns = list(df.columns)
     columns = columns[-1:] + columns[:-1]
     df = df[columns]
