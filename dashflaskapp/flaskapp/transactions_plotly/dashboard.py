@@ -59,7 +59,11 @@ def init_transactions(server):
             html.H2(children='Transactions Map', style = {'text-align': 'left'}),
             html.Div(children=''' map to visualize transactions '''),
             html.Br(),
-            dcc.Graph(id='transactions_map', figure={})
+            dcc.Loading(
+                id = 'loading-map',
+                type = 'default',
+                children = dcc.Graph(id='transactions_map', figure={})
+            )
         ]),
         html.Div(
             children = render_table(default=True),

@@ -28,81 +28,87 @@ def init_macros(server):
             html.H2(children='Housing Price Index', style={'text-align': 'left'}),
             html.Div(children=''' The House Price Index (HPI) is a broad measure of the movement of single-family house prices'''),
             html.Br(),
-            dcc.Graph(id='Housing Price Index', figure={}),
-            dcc.Slider(id='my-slider', min=0, max=184,
-                       marks={
-                           0: {'label': '1975Q1'},
-                           61: {'label': '1990Q1'},
-                           122: {'label': '2005Q1'},
-                           181: {'label': '2020Q1'}
-                       })
+            dcc.Loading(
+                children = [dcc.Graph(id='Housing Price Index', figure={}), 
+                            dcc.Slider(id='my-slider', min=0, max=184,
+                                        marks={
+                                            0: {'label': '1975Q1'},
+                                            61: {'label': '1990Q1'},
+                                            122: {'label': '2005Q1'},
+                                            181: {'label': '2020Q1'}
+                                        })],
+                type = 'default'
+            ),
         ]),
         html.Div([
             html.H2(children='Gross Domestic Product',
                     style={'text-align': 'left'}),
             html.Div(children=''' Gross domestic product (GDP) is the total monetary or market value of all the finished goods and services produced within a country's borders in a specific time period.'''),
             html.Br(),
-            dcc.Checklist(id="select_industry",
-                          options=[
-                              {"label": "Total GDP", "value": "Total_GDP"},
-                              {"label": "Goods Producing Industries",
-                               "value": "Goods_Producing_Industries"},
-                              {"label": "Construction", "value": "Construction"},
-                              {"label": "Utilities", "value": "Utilities"},
-                              {"label": "Wholsale Retail Trade",
-                               "value": "Wholesale_Retail_Trade"},
-                              {"label": "Transportation Storage",
-                               "value": "Transportation_Storage"},
-                              {"label": "Accomodation Food Services",
-                               "value": "Accommodation_Food_Services"},
-                              {"label": "Information Communication",
-                               "value": "Information_Communications"},
-                              {"label": "Finance Insurance",
-                                  "value": "Finance_Insurance"},
-                              {"label": "Real Estate", "value": "Real_Estate"}],
 
-                          value=["Quarter", "Total_GDP"],
-                          ),
+            dcc.Loading(
+                children = [dcc.Checklist(id="select_industry",
+                                options=[
+                                    {"label": "Total GDP", "value": "Total_GDP"},
+                                    {"label": "Goods Producing Industries",
+                                    "value": "Goods_Producing_Industries"},
+                                    {"label": "Construction", "value": "Construction"},
+                                    {"label": "Utilities", "value": "Utilities"},
+                                    {"label": "Wholsale Retail Trade",
+                                    "value": "Wholesale_Retail_Trade"},
+                                    {"label": "Transportation Storage",
+                                    "value": "Transportation_Storage"},
+                                    {"label": "Accomodation Food Services",
+                                    "value": "Accommodation_Food_Services"},
+                                    {"label": "Information Communication",
+                                    "value": "Information_Communications"},
+                                    {"label": "Finance Insurance",
+                                        "value": "Finance_Insurance"},
+                                    {"label": "Real Estate", "value": "Real_Estate"}],
 
-            dcc.Graph(id='GDP', figure={}),
-
-            dcc.Slider(id='gdp_slider', min=0, max=184,
-                       marks={
-                           0: {'label': '1975Q1'},
-                           61: {'label': '1990Q1'},
-                           122: {'label': '2005Q1'},
-                           181: {'label': '2020Q1'}
-                       })
+                                value=["Quarter", "Total_GDP"],
+                            ),
+                            dcc.Graph(id='GDP', figure={}),
+                            dcc.Slider(id='gdp_slider', min=0, max=184,
+                                marks={
+                                    0: {'label': '1975Q1'},
+                                    61: {'label': '1990Q1'},
+                                    122: {'label': '2005Q1'},
+                                    181: {'label': '2020Q1'}
+                                })],
+                type = 'default'
+            ),
 
         ]),
         html.Div([
             html.H2(children='Interest Rates', style={'text-align': 'left'}),
             html.Div(children='''An interest rate is the amount of interest due per period, as a proportion of the amount lent, deposited or borrowed. '''),
             html.Br(),
-            dcc.Checklist(id="select_ir",
-                          options=[
-                              {"label": "Prime Lending Rate",
-                               "value": "Prime Lending Rate"},
-                              {"label": "3-month Fixed Deposit Rate",
-                               "value": "3-month Fixed Deposit Rate"},
-                              {"label": "6-month Fixed Deposit Rate",
-                               "value": "6-month Fixed Deposit Rate"},
-                              {"label": "12-month Fixed Deposit Rate",
-                               "value": "12-month Fixed Deposit Rate"},
-                              {"label": "Savings Deposit Rate", "value": "Savings Deposit Rate"}, ],
+            dcc.Loading(
+                children = [dcc.Checklist(id="select_ir",
+                                options=[
+                                    {"label": "Prime Lending Rate",
+                                    "value": "Prime Lending Rate"},
+                                    {"label": "3-month Fixed Deposit Rate",
+                                    "value": "3-month Fixed Deposit Rate"},
+                                    {"label": "6-month Fixed Deposit Rate",
+                                    "value": "6-month Fixed Deposit Rate"},
+                                    {"label": "12-month Fixed Deposit Rate",
+                                    "value": "12-month Fixed Deposit Rate"},
+                                    {"label": "Savings Deposit Rate", "value": "Savings Deposit Rate"}, ],
 
-                          value=["Date", "Prime Lending Rate"],
-                          ),
-
-            dcc.Graph(id='IR', figure={}),
-
-            dcc.Slider(id='ir_slider', min=0, max=457,
-                       marks={
-                           0: {'label': '1983-Jan'},
-                           147: {'label': '1995-Jan'},
-                           304: {'label': '2008-Jan'},
-                           457: {'label': '2021-Jan'}
-                       })
+                                value=["Date", "Prime Lending Rate"],
+                            ),
+                            dcc.Graph(id='IR', figure={}),
+                            dcc.Slider(id='ir_slider', min=0, max=457,
+                                marks={
+                                    0: {'label': '1983-Jan'},
+                                    147: {'label': '1995-Jan'},
+                                    304: {'label': '2008-Jan'},
+                                    457: {'label': '2021-Jan'}
+                                })],
+                type = 'default'
+            ),
         ]),
 
         html.Div([
@@ -110,8 +116,10 @@ def init_macros(server):
             html.Div(
                  children=''' Demand for rental and purchase of flat in a period of time '''),
             html.Br(),
-
-            dcc.Graph(id='demand', figure={}),
+            dcc.Loading(
+                children = dcc.Graph(id='demand', figure={}),
+                type = 'default'
+            )
 
         ]),
 
@@ -121,47 +129,46 @@ def init_macros(server):
             html.Br(),
             html.Div(children=''' Property Type: '''),
 
-            dcc.RadioItems(id="propertyType",
-                           options=[
-                               {'label': 'Condominium', 'value': 'Condominium'},
-                               {'label': 'Detached', 'value': 'Detached'},
-                               {'label': 'Apartment', 'value': 'Apartment'},
-                               {'label': 'Terrace', 'value': 'Terrace'},
-                               {'label': 'Semi-detached', 'value': 'Semi-detached'},
-                               {'label': 'Strata Terrace', 'value': 'Strata Terrace'},
-                               {'label': 'Strata Detached', 'value': 'Strata Detached'},
-                               {'label': 'Strata Semi-detached',
-                                   'value': 'Strata Semi-detached'},
-                           ],
-                           value='Condominium'),
-            html.Br(),
-            html.Div(children=''' Tenure: '''),
-            dcc.RadioItems(id="tenure",
-                           options=[
-                               {'label': '99-years', 'value': '99-years'},
-                               {'label': 'Freehold', 'value': 'Freehold'},
-                               {'label': '999-years', 'value': '999-years'},
-                               {'label': '9999-years', 'value': '9999-years'},
-                           ], value='99-years'
-                           ),
-            html.Br(),
-            html.Div(children=''' District: '''),
-            dcc.Checklist(id="district",
-                          options=[
-                              {"label": "1", "value": 1},
-                              {"label": "2", "value": 2},
-                              {"label": "3", "value": 3},
-                              {"label": "4", "value": 4},
-                              {"label": "5", "value": 5},
-                              {"label": "6", "value": 6},
-                              {"label": "7", "value": 7}, ],
-
-                          value=[1],
-                          ),
-
-            dcc.Graph(id='transac', figure={}),
+            dcc.Loading(
+                children = [dcc.RadioItems(id="propertyType",
+                                options=[
+                                    {'label': 'Condominium', 'value': 'Condominium'},
+                                    {'label': 'Detached', 'value': 'Detached'},
+                                    {'label': 'Apartment', 'value': 'Apartment'},
+                                    {'label': 'Terrace', 'value': 'Terrace'},
+                                    {'label': 'Semi-detached', 'value': 'Semi-detached'},
+                                    {'label': 'Strata Terrace', 'value': 'Strata Terrace'},
+                                    {'label': 'Strata Detached', 'value': 'Strata Detached'},
+                                    {'label': 'Strata Semi-detached',
+                                        'value': 'Strata Semi-detached'},
+                                ], value='Condominium'),
+                            html.Br(),
+                            html.Div(children=''' Tenure: '''),
+                            dcc.RadioItems(id="tenure",
+                                options=[
+                                    {'label': '99-years', 'value': '99-years'},
+                                    {'label': 'Freehold', 'value': 'Freehold'},
+                                    {'label': '999-years', 'value': '999-years'},
+                                    {'label': '9999-years', 'value': '9999-years'},
+                                ], value='99-years'),
+                            html.Br(),
+                            html.Div(children=''' District: '''),
+                            dcc.Checklist(id="district",
+                                options=[
+                                    {"label": "1", "value": 1},
+                                    {"label": "2", "value": 2},
+                                    {"label": "3", "value": 3},
+                                    {"label": "4", "value": 4},
+                                    {"label": "5", "value": 5},
+                                    {"label": "6", "value": 6},
+                                    {"label": "7", "value": 7}, 
+                                    ], value=[1]),
+                            dcc.Graph(id='transac', figure={})],
+                type = 'default'
+            ),
+            
         ])
-    ])
+    ], className = 'container')
 
     @dashApp.callback(
         Output(component_id='Housing Price Index', component_property='figure'),
