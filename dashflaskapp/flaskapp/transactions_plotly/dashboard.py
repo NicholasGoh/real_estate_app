@@ -12,6 +12,18 @@ from .nav_bar import nav_bar_template
 
 all_click = []
 
+transactions = load_transactions()
+filter_options = {}
+cols_for_filter = ['region', 'street', 'propertyType', 'tenure', 'project']
+for col in cols_for_filter:
+    col_options = []
+    unique_values = transactions[col].unique()
+    col_options.append({'label': 'All', 'value': 'All'})
+    for val in unique_values:
+        col_options.append({'label': val, 'value': val})
+    filter_options[col] = col_options
+
+
 # takes in preprocessed click data from the maps and returns the html table rendered version
 # note default is invisible table
 def render_table(click_data = None, default=False, max_rows=26):
@@ -59,6 +71,39 @@ def init_transactions(server):
             html.H2(children='Transactions Map', style = {'text-align': 'left'}),
             html.Div(children=''' map to visualize transactions '''),
             html.Br(),
+            html.Div([
+                dcc.Dropdown(
+                    id='regionDropdown',
+                    options = filter_options['region'],
+                    value = 'All',
+                    placeholder='Select a regiion'
+                ),
+                dcc.Dropdown(
+                    id='streetDropdown',
+                    options = filter_options['street'],
+                    value = 'All',
+                    placeholder='Select a street'
+                ),
+                dcc.Dropdown(
+                    id='propertyTypeDropdown',
+                    options = filter_options['propertyType'],
+                    value = 'All',
+                    placeholder='Select a property type'
+                ),
+                dcc.Dropdown(
+                    id='tenureDropdown',
+                    options = filter_options['tenure'],
+                    value = 'All',
+                    placeholder='Select length of tenure'
+                ),
+                dcc.Dropdown(
+                    id='projectDropdown',
+                    options = filter_options['project'],
+                    value = 'All',
+                    placeholder='Select a project'
+                ),
+            ]),
+            html.Br(),
             dcc.Loading(
                 id = 'loading-map',
                 type = 'default',
@@ -68,18 +113,33 @@ def init_transactions(server):
         html.Div(
             children = render_table(default=True),
             id = 'comparison_table_div',
-        )
+        ),
+        html.Div(id='hidden-container')
     ], className = 'container')
+
 
     @dashApp.callback(
         Output(component_id='transactions_map', component_property='figure'),
-        Input(component_id='transactions_map', component_property='figure'),
+        [
+            Input(component_id='transactions_map', component_property='figure'),
+            Input(component_id='regionDropdown', component_property='value'),
+            Input(component_id='streetDropdown', component_property='value'),
+            Input(component_id='propertyTypeDropdown', component_property='value'),
+            Input(component_id='tenureDropdown', component_property='value'),
+            Input(component_id='projectDropdown', component_property='value'),
+        ]
     )
 
-    def make_map(figure):
+# debug here, add additional arguements to function
+    def make_map(figure, region, street, propertyType, tenure, project):
         transactions = load_transactions()
+        filters = [region, street, propertyType, tenure, project]
+        for i in range(len(cols_for_filter)):
+            if filters[i] != 'All':
+                transactions = transactions[transactions[cols_for_filter[i]] == filters[i]]
+
         fig = px.scatter_mapbox(transactions, lat='x', lon='y', hover_name='project', hover_data=['price', 'noOfUnits', 'propertyType', 'floorRange', 'project', 'tenure', 'region', 'street', 'area'],
-                                color_discrete_sequence=['fuchsia'], zoom=12, height=450)
+                                color='propertyType', zoom=12, height=450)
         fig.update_layout(mapbox_style='open-street-map')
         fig.update_layout(clickmode='event+select')
         fig.update_layout(margin={'r':0,'t':0,'l':0,'b':0})
