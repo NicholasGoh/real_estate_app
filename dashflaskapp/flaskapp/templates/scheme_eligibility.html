@@ -3,6 +3,10 @@
 
     <hr>
     <div class="container">
+    {% for index in range(0, schemeNames|length + 1) %}
+        <p>{{schemeNames[index]}}</p>
+        <p>{{schemeEligible[index]}}</p>
+    {% endfor %}
     <table class='table table-hover'>
         <thead class="thead-dark">
             <tr>
@@ -12,16 +16,16 @@
             </tr>
         </thead>
         <tbody>
-            {% for index in range(schemeNames|length) %}
-            <tr>
-                <td>{{ schemeNames[index] }}</td>
-                {% if schemeEligible[index] == true %}
-                    <td class='bg-success'>Eligible</td>
-                {% else %}
-                    <td class='bg-danger'>Not eligible</td>
-                {% endif %}
-                <td>{{ schemeDetails[index] }}</td>
-            </tr>
+            {% for index in range(0, schemeNames|length) %}
+                <tr>
+                    <td>{{ schemeNames[index] }}</td>
+                    {% if schemeEligible[index] == true %}
+                        <td class='bg-success'>Eligible</td>
+                    {% else %}
+                        <td class='bg-danger'>Not eligible</td>
+                    {% endif %}
+                    <td>{{ schemeDetails[index] }}</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>

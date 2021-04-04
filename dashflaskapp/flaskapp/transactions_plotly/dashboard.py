@@ -1,6 +1,6 @@
 import pandas as pd
 import dash
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 import plotly.express as px
 import dash_html_components as html
 import dash_core_components as dcc
@@ -102,6 +102,7 @@ def init_transactions(server):
                     value = 'All',
                     placeholder='Select a project'
                 ),
+                html.Button('Search', id='search-filter')
             ]),
             html.Br(),
             dcc.Loading(
@@ -121,29 +122,34 @@ def init_transactions(server):
     @dashApp.callback(
         Output(component_id='transactions_map', component_property='figure'),
         [
+            Input(component_id='search-filter', component_property='n_clicks'),
             Input(component_id='transactions_map', component_property='figure'),
-            Input(component_id='regionDropdown', component_property='value'),
-            Input(component_id='streetDropdown', component_property='value'),
-            Input(component_id='propertyTypeDropdown', component_property='value'),
-            Input(component_id='tenureDropdown', component_property='value'),
-            Input(component_id='projectDropdown', component_property='value'),
+        ],
+        [
+            State(component_id='regionDropdown', component_property='value'),
+            State(component_id='streetDropdown', component_property='value'),
+            State(component_id='propertyTypeDropdown', component_property='value'),
+            State(component_id='tenureDropdown', component_property='value'),
+            State(component_id='projectDropdown', component_property='value'),
         ]
     )
 
 # debug here, add additional arguements to function
-    def make_map(figure, region, street, propertyType, tenure, project):
+    def make_map(n_clicks, figure, region, street, propertyType, tenure, project):
         transactions = load_transactions()
         filters = [region, street, propertyType, tenure, project]
+
         for i in range(len(cols_for_filter)):
             if filters[i] != 'All':
                 transactions = transactions[transactions[cols_for_filter[i]] == filters[i]]
-
-        fig = px.scatter_mapbox(transactions, lat='x', lon='y', hover_name='project', hover_data=['price', 'noOfUnits', 'propertyType', 'floorRange', 'project', 'tenure', 'region', 'street', 'area'],
-                                color='propertyType', zoom=12, height=450)
+        if transactions.empty:
+            fig = px.scatter_mapbox(lat=['1.3521'], lon=['103.8198'])
+        else:
+            fig = px.scatter_mapbox(transactions, lat='x', lon='y', hover_name='project', hover_data=['price', 'region', 'street', 'area'],
+                                    custom_data=['noOfUnits', 'propertyType', 'floorRange', 'project', 'tenure'], zoom=12, height=450)
         fig.update_layout(mapbox_style='open-street-map')
         fig.update_layout(clickmode='event+select')
         fig.update_layout(margin={'r':0,'t':0,'l':0,'b':0})
-
         return fig
 
     @dashApp.callback(
@@ -157,15 +163,17 @@ def init_transactions(server):
         # preprocess the click data from maps
         points = click['points'][0]
         customdata = points['customdata']
+        print(points)
+        print(customdata)
         data = {
                 'x': points['lat'],
                 'y': points['lon'],
-                'price': customdata[0],
-                'noOfUnits': customdata[1],
-                'propertyType': customdata[2],
-                'floorRange': customdata[3],
-                'project': customdata[4],
-                'tenure': customdata[5],
+                'noOfUnits': customdata[0],
+                'propertyType': customdata[1],
+                'floorRange': customdata[2],
+                'project': customdata[3],
+                'tenure': customdata[4],
+                'price': customdata[5],
                 'region': customdata[6],
                 'street': customdata[7],
                 'area': customdata[8]
