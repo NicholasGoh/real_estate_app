@@ -1,0 +1,23 @@
+name: real_estate
+channels:
+  - conda-forge
+  - defaults
+  - anaconda
+dependencies:
+  - python==3.6.7
+  - pandas
+  - dash-bootstrap-components
+  - ipykernel
+  - requests
+  - pip
+  - pip:
+    - jdc
+    - altair
+    - streamlit
+    - flask
+    - flask-wtf
+    - flask-assets
+    - python-dotenv
+    - plotly
+    - dash
+    - ddtrace

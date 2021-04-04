@@ -10,7 +10,7 @@ class FreshStartHousing():
         footnote = \
 	'''
         You must have occupoed a public rental flat for at least 1 year and not own any other properties overseas or locally
-        More info <a href="https://www.hdb.gov.sg/residential/buying-a-flat/new/schemes-and-grants/temporary-loan-scheme" class="alert-link>here</a>
+        More info <a href="https://www.hdb.gov.sg/residential/buying-a-flat/new/schemes-and-grants/temporary-loan-scheme" class="alert-link">here</a>
 	'''
         try:
             assert self.employment == 'Yes'

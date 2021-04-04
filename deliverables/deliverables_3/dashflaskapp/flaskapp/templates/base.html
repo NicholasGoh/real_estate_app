@@ -1,0 +1,73 @@
+{#this is a jinja comment#}
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {# bootstrap 4 #}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        {#head for maps#}
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style>
+          /* Always set the map height explicitly to define the size of the div
+           * element that contains the map. */
+          #map {
+            height: 100%;
+          }
+          /* Optional: Makes the sample page fill the window. */
+          html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+        {#end head for maps#}
+    </head>
+    <body>
+        {% if nav_bar != 'disable' %}
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">propViewer</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active" id='home-btn'><a href="{{url_for('homepage')}}">Home</a></li>
+                    <li id='calculator-btn'><a href="{{url_for('personal_info')}}" >Financial Schemes</a></li>
+                    <li id="macros-btn"><a href="{{url_for('/macros/')}}">Macros</a></li>
+                    <li id="transactions-btn"><a href="{{url_for('/transactions/')}}">Transactions</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% else %}
+        {% endif %}
+        
+        {#the following is where other .html extends this base.html#}
+        {% block content %}{% endblock %}
+
+        <script>
+            $('#home-btn').click(function(){
+                $('li').removeClass('active');
+                $('#home-btn').addClass('active');
+            });
+            $('#calculator-btn').click(function(){
+                $('li').removeClass('active');
+                $('#calculator-btn').addClass('active');
+            });
+            $('#macros-btn').click(function(){
+                $('li').removeClass('active');
+                $('#macros-btn').addClass('active');
+            });
+            $('#transactions-btn').click(function(){
+                $('li').removeClass('active');
+                $('#transactions-btn').addClass('active');
+            });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>

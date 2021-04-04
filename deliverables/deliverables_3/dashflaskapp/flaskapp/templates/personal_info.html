@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1 class = "align-middle">Enter personal info</h1>
+        <form action="{{ url_for('scheme_eligibility') }}" method="post" novalidate>
+            <div class="form-group">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.avgIncome.label }}
+                    {{ form.avgIncome(class="form-control") }}<br>
+                    {% for error in form.avgIncome.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.age.label }}
+                    {{ form.age(class="form-control") }}<br>
+                    {% for error in form.age.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.noOfRooms.label }}
+                    {{ form.noOfRooms(class="form-control") }}<br>
+                    {% for error in form.noOfRooms.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.firstTime.label }}
+                    {{ form.firstTime(class="form-control") }}<br>
+                    {% for error in form.firstTime.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.relationship.label }}
+                    {{ form.relationship(class="form-control") }}<br>
+                    {% for error in form.relationship.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.employment.label }}
+                    {{ form.employment(class="form-control") }}<br>
+                    {% for error in form.employment.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.remainingLease.label }}
+                    {{ form.remainingLease(class="form-control") }}<br>
+                    {% for error in form.remainingLease.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.appliedForFlat.label }}
+                    {{ form.appliedForFlat(class="form-control") }}<br>
+                    {% for error in form.appliedForFlat.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.loan.label }}
+                    {{ form.loan(class="form-control") }}<br>
+                    {% for error in form.loan.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+            </div>
+            <p>{{ form.submit(class="btn btn-primary") }}</p>
+        </form>
+    </div>
+{% endblock %}
