@@ -54,6 +54,44 @@ def render_table(click_data = None, default=False, max_rows=26):
         className = 'table table-bordered active'
     )
 
+def render_suggestion(click_data = None, default=False, max_rows=26):
+    if default:
+        return html.Table(
+            id = 'suggestion_table'
+        )
+    columns_to_show = ['region', 'street', 'area', 'propertyType', 'nettPrice']
+    transactions = load_transactions()
+    transactions = transactions[columns_to_show]
+    click_data = click_data[-1]
+    street = click_data['street'].item()
+    project = click_data['project'].item()
+    price = click_data['price'].item()
+    df = transactions.loc[(transactions['street'] == street) & (transactions['nettPrice'] != price) & (transactions['nettPrice'] != 0.0)].head(2)
+    if df.empty:
+        return [
+            html.H3(f'Sugeested properties in the same street: {street}'),
+            html.H5('There are no available properties in the same area')
+            ]
+    df.index = [[f'Property {i}' for i in range(len(df))]]
+    rownames = df.columns
+    df = df.T
+    df['info'] = rownames
+    columns = list(df.columns)
+    columns = columns[-1:] + columns[:-1]
+    df = df[columns]
+    return [
+        html.H3(f'Sugeested properties in the same street: {street}'),
+        html.Table(
+        # Header
+        [html.Tr([html.Th(col) for col in df.columns]) ] +
+        # Body
+        [html.Tr([
+            html.Td(df.iloc[i][col]) for col in df.columns
+        ]) for i in range(min(len(df), max_rows))],
+        id = 'suggestion_table',
+        className = 'table table-bordered active'
+    )]
+
 # inits transactions dash app that links to flask app
 def init_transactions(server):
     dashApp = dash.Dash(
@@ -115,6 +153,10 @@ def init_transactions(server):
             children = render_table(default=True),
             id = 'comparison_table_div',
         ),
+        html.Div(
+            children = render_suggestion(default=True),
+            id = 'suggestion_table_div',
+        ),
         html.Div(id='hidden-container')
     ], className = 'container')
 
@@ -152,8 +194,10 @@ def init_transactions(server):
         fig.update_layout(margin={'r':0,'t':0,'l':0,'b':0})
         return fig
 
-    @dashApp.callback(
+    @dashApp.callback([
         Output(component_id='comparison_table_div', component_property='children'),
+        Output(component_id='suggestion_table_div', component_property='children'),
+    ],
         Input(component_id='transactions_map', component_property='clickData'),
     )
     
@@ -163,8 +207,6 @@ def init_transactions(server):
         # preprocess the click data from maps
         points = click['points'][0]
         customdata = points['customdata']
-        print(points)
-        print(customdata)
         data = {
                 'x': points['lat'],
                 'y': points['lon'],
@@ -181,6 +223,6 @@ def init_transactions(server):
         data = {k: [str(v)] for k, v in data.items()}
         data = pd.DataFrame.from_dict(data)
         all_click.append(data)
-        return render_table(click_data=all_click)
+        return render_table(click_data=all_click), render_suggestion(click_data=all_click)
 
     return dashApp.server
