@@ -39,5 +39,6 @@ def scheme_eligibility():
             detail = data[2]
             details = str(detail.replace('\n', '<br/>').replace('\t', '')) + '<br/>'
             schemeDetails.append(Markup(details))
+        return render_template('scheme_eligibility.html', schemeNames = schemeNames, schemeEligible = schemeEligible, schemeDetails = schemeDetails)
 
-    return render_template('scheme_eligibility.html', schemeNames = schemeNames, schemeEligible = schemeEligible, schemeDetails = schemeDetails)
+    return render_template('personal_info.html', form=form)
